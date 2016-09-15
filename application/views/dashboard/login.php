@@ -27,7 +27,7 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <p style="color:red;" class="login-box-msg"><?php if($errors)printf($errors);?></p>
+        <p style="color:red;" class="login-box-msg"><?php if($errors)echo($errors);?></p>
       <form name="loginForm" action="/dashboard/login" method="post" id="loginFormId" >
       
      
@@ -37,6 +37,7 @@
           </div>
           <div class="form-group has-feedback">
             <input type="password" class="form-control" name="password" placeholder="Password" required/>
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">

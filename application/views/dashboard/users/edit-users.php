@@ -54,6 +54,8 @@
                             <option value=''>None</option>
                             <option <?php if($users['role']=='admin'){echo " selected='selected' ";}?> value='admin'>Admin</option>
                             </select>
+                            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+           
                     </div>
                    
                    

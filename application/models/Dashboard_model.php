@@ -11,13 +11,8 @@ class Dashboard_model extends CI_Model {
 
  public function fn_update_session($id,$data){
          $this->db->where('id', $id);
-         $this->db->update('ci_sessions', $data);
-		 if($this->db->affected_rows() >0){
-		  return true;
-		  }else{
-			  return false;
-			  }
-	
+       $dbRet=  $this->db->update('ci_sessions', $data);
+		
 
    }
    public function fn_delete_session($id='',$user_id=''){
@@ -45,10 +40,7 @@ class Dashboard_model extends CI_Model {
 	}
 
 	
-		 public function fn_save_users($usersArr){
-	 $this->db->insert('users',$usersArr);
-		} 	  
-
+		
   public function verify_admin_credentials($authCredentials){
 
         $query = $this->db->query("SELECT * FROM admin_login WHERE user_name='".$authCredentials["user_name"]."'");
@@ -64,7 +56,8 @@ class Dashboard_model extends CI_Model {
                 
       
   public function fn_dashboard_save_users($users){
-	 $this->db->insert('admin_login',$users);
+	$dbRet= $this->db->insert('admin_login',$users);
+	
 		}
         			
    public function fn_users_get_data(){
@@ -97,7 +90,8 @@ class Dashboard_model extends CI_Model {
 	 public function fn_users_update($id,$name){
          $dataArr['name']=$name;
          $this->db->where('id', $id);
-         $this->db->update('users', $dataArr);
+        $dbRet= $this->db->update('users', $dataArr);
+			
        
    }
    	

@@ -26,7 +26,7 @@
                   <h3 class="box-title">Quick Add</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form method="post" role="form" action="/dashboard/addUsers"  enctype="multipart/form-data">
+                <form method="post" role="form" action="/dashboard/addUsers" autocomplete="off" enctype="multipart/form-data">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="name">User Name</label>
@@ -59,6 +59,8 @@
                             <option value='active'>Active</option>
                             <option value='inactive'>Inactive</option>
                         </select>
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+           
                     </div>
                       
                   

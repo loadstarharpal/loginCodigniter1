@@ -161,20 +161,19 @@ public function forceLogout() {
                 $users['password'] = md5($this->input->post('password'));               
                 $users['mobile'] = $this->input->post('mobile');
                 $users['status'] = $this->input->post('status');
-                $users['role'] = $this->input->post('role');
-        
-             
-                $this->dashboard_model->fn_dashboard_save_users($users);
-                header("Location:/dashboard/addUsers");
+                $users['role'] = $this->input->post('role');  
+                $this->dashboard_model->fn_dashboard_save_users($users); 
+               
             }
-           
-            
-           $user_name=  $this->session->userdata('userInfo');
-            $data["user_name"] = $user_name;
-           $image=$this->session->userdata('image_path');
-            $data['userimg']=$image;
-           $this->load->view('templates/header', $data);
-            $this->load->view('dashboard/users/add-users', $users);
+                $user_name=  $this->session->userdata('userInfo');
+                $data["user_name"] = $user_name;
+                
+                $image=$this->session->userdata('image_path');
+                $data['userimg']=$image;
+                $this->load->view('templates/header', $data);
+                $this->load->view('dashboard/users/add-users', $users);
+        
+
         }
     }
 
