@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller {
  public function clientInfo(){
         $this->load->library('user_agent');
         if ($this->agent->is_browser()){
-            $agent = $this->agent->browser().' '.$this->agent->version();
+            $agent = $this->agent->browser();
         }
         elseif ($this->agent->is_robot()){
             $agent = $this->agent->robot();
@@ -47,7 +47,9 @@ class Dashboard extends CI_Controller {
         else{
             $agent = 'Unidentified User Agent';
         }
-        $getloc = json_decode(file_get_contents("http://ipinfo.io/"));
+        $ip = $this->input->ip_address();
+        
+        $getloc = json_decode(file_get_contents("http://ipinfo.io/$ip/org"));
         return $agent.'/'. $this->agent->platform().'/'. $getloc->city; 
     }
     public function login() {
