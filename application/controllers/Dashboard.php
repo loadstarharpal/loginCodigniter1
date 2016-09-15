@@ -54,6 +54,10 @@ class Dashboard extends CI_Controller {
         
         return $agent.'/'. $this->agent->platform().'/'. $getloc->city; 
     }
+
+
+        
+
     public function login() {
        
         if ($this->session->userdata("userInfo")!='') {

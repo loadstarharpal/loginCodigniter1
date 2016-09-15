@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //$route['default_controller'] = 'welcome';
 $route['default_controller'] = "dashboard";
+$route['api/v1/invest'] = "investoptions/invest";
 $route['dashboard/login'] = "dashboard/login";
 $route['dashboard/logout'] = "dashboard/logout";
 $route['dashboard/forcelogout'] = "dashboard/forceLogout";
