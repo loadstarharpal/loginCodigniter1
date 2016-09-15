@@ -27,12 +27,13 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
+        <p style="color:red;" class="login-box-msg"><?php if($errors)printf($errors);?></p>
       <form name="loginForm" action="/dashboard/login" method="post" id="loginFormId" >
       
      
           <div class="form-group has-feedback">
             <input type="email" class="form-control" name="user_name" placeholder="Username" required />
-            <span class="glyphicon glyphicon-envelope form-control-feedback"><?php if($errors)echo$errors;?></span>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
             <input type="password" class="form-control" name="password" placeholder="Password" required/>

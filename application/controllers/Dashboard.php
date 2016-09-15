@@ -63,6 +63,7 @@ class Dashboard extends CI_Controller {
         $this->form_validation->set_rules('password', 'password', 'trim|required|xss_clean');
         if ($this->form_validation->run() == FALSE) {
             $data['errors']= validation_errors(); 
+
             $this->load->view('dashboard/login',$data);
         } else {
             $user_name = $this->input->post("user_name");
@@ -80,21 +81,24 @@ class Dashboard extends CI_Controller {
                     $client_data['user_id']=  $this->session->userid;
                     $this->dashboard_model->fn_update_session($this->session->session_id,$client_data);
                    
-                    if($this->session->userdata("role")=='delivery manager'){
-                             header("Location:/dashboard/deliveryboard");
-                            
-                            }
-                        elseif($this->session->userdata("role")=='admin'){
+                    if($this->session->userdata("role")=='admin'){
                              header("Location:/dashboard");
                             
+                            }else{
+                                $this->session->set_userdata("successMessage", "You don't access.");
+                                $data['errors']=$this->session->successMessage;
+                                $this->load->view('dashboard/login', $data);
                             }
+                       
                 } else {
-                    $this->session->set_userdata("successMessage", 'Invalid username or password');
-                    $this->load->view('dashboard/login');
+                    $this->session->set_userdata("errorMessage", 'Invalid  password');
+                    $data['errors']=$this->session->errorMessage;
+                    $this->load->view('dashboard/login', $data);
                 }
             } else {
-                $this->session->set_userdata("successMessage",'Invalid username or password');
-                $this->load->view('dashboard/login');
+                $this->session->set_userdata("errorMessage",'Invalid username');
+                $data['errors']=$this->session->errorMessage;
+                $this->load->view('dashboard/login', $data);
             }
         }
     }
