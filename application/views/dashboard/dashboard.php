@@ -270,9 +270,9 @@
     <!-- jQuery Knob Chart -->
     <script src="/plugins/knob/jquery.knob.js" type="text/javascript"></script>
     <!-- daterangepicker
-<script src="/dist/js/moment.js" type="text/javascript"></script>
+
      -->
-    
+    <script src="/dist/js/moment.js" type="text/javascript"></script>
     <script src="/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <!-- datepicker -->
     <script src="/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
