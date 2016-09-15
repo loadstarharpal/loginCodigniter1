@@ -48,8 +48,10 @@ class Dashboard extends CI_Controller {
             $agent = 'Unidentified User Agent';
         }
         $ip = $this->input->ip_address();
+
         
-        $getloc = json_decode(file_get_contents("http://ipinfo.io/$ip/org"));
+        $getloc = json_decode(file_get_contents("http://ipinfo.io/$ip"));
+        
         return $agent.'/'. $this->agent->platform().'/'. $getloc->city; 
     }
     public function login() {
