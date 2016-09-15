@@ -116,7 +116,7 @@ public function forceLogout() {
     }else{$id=0;
         $user_id=$this->session->userid;
     }
-    $this->dashboard_model->fn_delete_session($id,$user_id);
+    $this->dashboard_model->fn_delete_session($id,$user_id,$this->session->session_id);
         header('Location: /dashboard/login');
     
     }

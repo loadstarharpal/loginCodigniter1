@@ -297,7 +297,7 @@ function logout(id){
     var r = confirm("Are you sure to logout ?");
 
     if (r == true) {      
-var posting=$.post("/dashboard/forcelogout", {id: id});
+var posting=$.post("/dashboard/forcelogout", {id: id,"<?php echo $this->security->get_csrf_token_name(); ?>":"<?php echo $this->security->get_csrf_hash(); ?>"});
         console.log(posting);
 
         posting.done(function( data ) { 

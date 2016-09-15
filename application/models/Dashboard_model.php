@@ -15,9 +15,11 @@ class Dashboard_model extends CI_Model {
 		
 
    }
-   public function fn_delete_session($id='',$user_id=''){
+   public function fn_delete_session($id='',$user_id='',$cur_id){
 		if(!empty($id) || !empty($user_id)){
 	   		if(!empty($user_id)){
+
+	         	$this->db->where('id!=', $cur_id);
 	         	$this->db->where('user_id', $user_id);
 	         }
 			elseif(!empty($id)){
