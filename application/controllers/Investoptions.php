@@ -22,6 +22,9 @@ class Investoptions extends REST_Controller
     {
         // Construct our parent class
         parent::__construct();
+        /* 
+			custom_functions library used to store custom function  
+			*/
         $this->load->library('custom_functions');	        
            
     }
@@ -48,13 +51,17 @@ class Investoptions extends REST_Controller
 		}
 		else{				
 			(int)$total_amount=$this->input->get('total_amount');
+			/* 
+			function min_invest_avg() check weather minimum requirement of amount exceeds 
+			the total amount and return new array of minimum constraints 
+			*/
 			$final_min_invest= $this->custom_functions->min_invest_avg($min_invest,$total_amount) ;
 			$min_invest = array_fill_keys(array_keys($min_invest), 0);
 			if(!empty($final_min_invest)){
 				$final_min_invest_sum=array_sum($final_min_invest);
 				$diff=$total_amount-$final_min_invest_sum;
 				$avg=($diff+$final_min_invest_sum)/sizeof($final_min_invest);
-				$avg = $avg - ($avg % 1000);
+				$avg=round($avg,-3);		
 				$output = array();
 				foreach ($final_min_invest as $key => $value) {
 					if($value<$avg){
@@ -63,7 +70,8 @@ class Investoptions extends REST_Controller
 							$output[$key]=$value+$addon;
 							$diff=$diff-$addon;
 						}else{
-							$output[$key]=$value;
+							$output[$key]=$value+$diff;
+							$diff-=$diff;
 						}             
 					}else{ 
 						$output[$key]=$value;
@@ -71,11 +79,11 @@ class Investoptions extends REST_Controller
 
 					$min_invest[$key] =$output[$key];
 				}
-
+				
 				$array_keys=array_keys($output);
 				$min_invest[$array_keys[0]]=$output[$array_keys[0]]+$diff;
 			}
-			//$data=json_encode($min_invest,true);
+
 			$result=array('status'=>'success', 'total_amount'=>$total_amount,'data'=>$min_invest);    	
 			$this->response($result,200);
 		}
